@@ -22,3 +22,7 @@ export type Tag = {
   id: string;
   label: string;
 };
+
+export type NewNoteProps = {
+  onSubmit : (data : NoteData) => void;
+}
