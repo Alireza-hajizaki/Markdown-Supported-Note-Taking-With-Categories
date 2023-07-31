@@ -35,6 +35,14 @@ export type NoteFormProps = {
   availableTags: Tag[];
 }
 
+export type SimplifedNote = {
+  tags: Tag[];
+  title: string;
+  id: string;
+}
+
 export type NoteListProps = {
   availableTags : Tag[];
+  notes : SimplifedNote[]
 }
+
