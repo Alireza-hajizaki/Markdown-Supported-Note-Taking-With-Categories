@@ -2,15 +2,9 @@ import {useRef , useState} from "react";
 import { Form , Stack ,Row , Col , Button} from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import CreatableReactSelect from "react-select/creatable"
-import { NoteData , Tag } from "../types/type";
+import { NoteFormProps , Tag } from "../types/type";
 import { v4 as uuidV4} from "uuid";
-
-
-type NoteFormProps = {
-    onSubmit : (data : NoteData) => void;
-    onAddTag: (tag: Tag) => void;
-    availableTags: Tag[];
-}
+import { FormEvent } from "react";
 
 const NoteForm = ({onSubmit , onAddTag , availableTags} : NoteFormProps) => {
 
@@ -19,8 +13,8 @@ const NoteForm = ({onSubmit , onAddTag , availableTags} : NoteFormProps) => {
     const [selectedTags , setSelectedTags] = useState<Tag[]>([])
     const navigate = useNavigate()
 
-    function handleSubmit (e: React.FormEvent) {
-     e.preventDefault()
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault()
 
      onSubmit({
         title: titleRef.current!.value,
@@ -32,7 +26,7 @@ const NoteForm = ({onSubmit , onAddTag , availableTags} : NoteFormProps) => {
     }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form >
         <Stack gap={4}>
            <Row>
              <Col>
@@ -70,7 +64,7 @@ const NoteForm = ({onSubmit , onAddTag , availableTags} : NoteFormProps) => {
                     <Form.Control required ref={markdownRef} as="textarea" rows={15}/>
             </Form.Group>
             <Stack direction="horizontal" gap={2} className="justify-content-end">
-                <Button type="button" variant="primary">Save</Button>
+                <Button type="button" variant="primary" onClick={handleSubmit}>Save</Button>
                 <Link to={".."}>
                  <Button type="button" variant="primary">Cancel</Button>
                 </Link>
