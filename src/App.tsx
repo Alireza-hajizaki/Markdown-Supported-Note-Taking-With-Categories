@@ -26,11 +26,15 @@ function App() {
     })
   }
 
+  function addTag(tag: Tag) {
+    setTags(prev => [...prev , tag])
+  }
+
   return (
     <Container className="my-4">
       <Routes>
         <Route path="/" element={<h1>Home</h1>}></Route>
-        <Route path="/new" element={<NewNote onSubmit={onCreateNote} />}></Route>
+        <Route path="/new" element={<NewNote onSubmit={onCreateNote} onAddTag={addTag} availableTags={tags}/>}></Route>
         <Route path="*" element={<Navigate to="/" />}></Route>
       </Routes>
     </Container>
