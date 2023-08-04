@@ -7,6 +7,7 @@ import { Container } from "react-bootstrap";
 import { RawNote , Tag , NoteData } from "./types/type";
 import {useLocalStorage} from "./Hooks/useLocalStorage";
 import { v4 as uuidV4} from "uuid";
+import NoteLayout from "./components/NoteLayout";
 
 
 function App() {
@@ -36,7 +37,7 @@ function App() {
       <Routes>
         <Route path="/" element={<NoteList notes={notesWithTags} availableTags={tags}/>} />
         <Route path="/new" element={<NewNote onSubmit={onCreateNote} onAddTag={addTag} availableTags={tags}/>} />
-        <Route path="/:id">
+        <Route>
           <Route index element={<h1>Show</h1>}/>
           <Route path="edit" element={<h1>Edit</h1>} />
         </Route>
